@@ -21,13 +21,12 @@ function LessonTwo(props) {
       alert("ник admin зарезервирован")
       return;
     }
-    const newMessageList = [...messageList, currentMessage];
-    setMessageList(newMessageList);
+    setMessageList(prevState => [...prevState, currentMessage]);
     setCurrentMessage(initCurrentMessage());
   };
 
   const sendBotMessage = (lastMessage) => {
-    const newBotMessage = {id: nextId, author: "admin", text: `${lastMessage.author} cпасибо за ваше сообщение`};
+    const newBotMessage = {id: nextId + 'response', author: "admin", text: `${lastMessage.author} cпасибо за ваше сообщение`};
     const newMessageList = [...messageList, newBotMessage];
     setMessageList(newMessageList);
     setnextId(nextId + 1);
@@ -41,7 +40,6 @@ function LessonTwo(props) {
     if (lastMessage.author === "admin") {
       return;
     }
-    console.log(nextId)
     setnextId(nextId + 1);
     setTimeout(() => {
       sendBotMessage(lastMessage)
@@ -75,12 +73,14 @@ function LessonTwo(props) {
       </div>
 
       <div className="messages__list">
-        {messageList.map((message) => (
-          <div className="message__item" key={message.id}>
-            <p>{message.author}</p>
-            <p>{message.text}</p>
-          </div>
-        ))}
+        {messageList.map((message) => {
+          return(
+            <div className="message__item" key={message.id}>
+              <p>{message.author}</p>
+              <p>{message.text}</p>
+            </div>
+          )
+        })}
       </div>
     </div>
   );
