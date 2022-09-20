@@ -1,11 +1,12 @@
 import './App.css';
-import Message from './Message.js';
+import LessonOne from './LessonOne.js';
+import LessonTwo from './LessonTwo.js';
 
 function App() {
   return (
     <div className="App">
-      <p>Урок 1</p>
-      <Message label="Начало положено"></Message>
+      <LessonOne label="Props и компоненты"></LessonOne>
+      <LessonTwo label="Рендеринг списка"></LessonTwo>
     </div>
   );
 }

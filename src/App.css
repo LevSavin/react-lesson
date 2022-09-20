@@ -1,7 +1,20 @@
 .App {
-  text-align: center;
+  margin-left: 40px;
+}
+.lesson__label {
+  font-weight: 700;
 }
 
-.message__label {
-  color: blue
+.message__item {
+  margin-top: 16px;
+  border: 1px solid gray;
+  max-width: 600px;
+}
+.messages__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+.messages__form-item {
+  margin-bottom: 20px;
 }
