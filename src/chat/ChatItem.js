@@ -1,4 +1,11 @@
 import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 const initCurrentMessage = () => ({id: null, author: "", text: ""});
 
@@ -49,39 +56,59 @@ function LessonTwo(props) {
 
   return (
     <div>
-      <p>Урок 2</p>
-      <p className="lesson__label messages">{ props.label }</p>
-
-      <div className='messages__form'>
-        <input
+      <Box
+        component="form"
+        sx={{
+          width: 500, maxWidth: '100%', mb: 5,
+          '& .MuiTextField-root': { mb: 2 },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          autoFocus
+          fullWidth
           value={currentMessage.author}
           onChange={(event) => {setNewMessage('author', event.target.value)}}
-          placeholder='Автор'
-          className='messages__form-item'
-        ></input>
-        <textarea
+          required
+          id="outlined-required"
+          label="Автор"
+        />
+        <TextField
+          fullWidth
           value={currentMessage.text}
           onChange={(event) => {setNewMessage('text', event.target.value)}}
-          placeholder='Текст'
-          rows={3}
-          className='messages__form-item'
-        ></textarea>
-        <button
-          onClick={sendMessage}
-          className='messages__form-item'
-        >Отправить</button>
-      </div>
+          required
+          id="outlined-multiline-flexible"
+          label="Текст"
+          multiline
+          maxRows={4}
+        />
+        <Button variant="contained" endIcon={<SendIcon />} onClick={sendMessage}>
+          Отправить
+        </Button>
+      </Box>
 
-      <div className="messages__list">
+      <Box
+        sx={{
+          width: 500, maxWidth: '100%'
+        }}
+      >
         {messageList.map((message) => {
           return(
-            <div className="message__item" key={message.id}>
-              <p>{message.author}</p>
-              <p>{message.text}</p>
-            </div>
+            <Card sx={{ mb: 3 }}>
+              <CardContent>
+                <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+                  {message.author}
+                </Typography>
+                <Typography sx={{ fontSize: 14 }} gutterBottom>
+                  {message.text}
+                </Typography>
+              </CardContent>
+            </Card>
           )
         })}
-      </div>
+      </Box>
     </div>
   );
 }

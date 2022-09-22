@@ -1,12 +1,12 @@
 import './App.css';
 import LessonOne from './LessonOne.js';
-import LessonTwo from './LessonTwo.js';
+import ChatMain from './chat/ChatMain.js';
 
 function App() {
   return (
     <div className="App">
       <LessonOne label="Props и компоненты"></LessonOne>
-      <LessonTwo label="Рендеринг списка"></LessonTwo>
+      <ChatMain></ChatMain>
     </div>
   );
 }
