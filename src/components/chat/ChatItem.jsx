@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -10,11 +9,10 @@ import Typography from '@mui/material/Typography';
 
 const initCurrentMessage = () => ({id: null, author: "", text: ""});
 
-function ChatItem(props) {
+function ChatItem({code}) {
   const [messageList, setMessageList] = useState([]);
   const [currentMessage, setCurrentMessage] = useState(initCurrentMessage());
   const [nextId, setnextId] = useState(0);
-  const params = useParams();
   
   const setNewMessage = (key, value) => {
     const newCurrentMessage = {id: nextId};
@@ -57,8 +55,8 @@ function ChatItem(props) {
   }, [messageList]);
 
   return (
-    <div key={params.code}>
-      <p>{params.code}</p>
+    <div>
+      <p>{code}</p>
       <Box
         component="form"
         sx={{
@@ -99,7 +97,7 @@ function ChatItem(props) {
       >
         {messageList.map((message) => {
           return(
-            <Card sx={{ mb: 3 }}>
+            <Card sx={{ mb: 3 }} key={message.id}>
               <CardContent>
                 <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {message.author}
