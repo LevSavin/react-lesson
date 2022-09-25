@@ -1,6 +1,7 @@
-import ChatItem from './ChatItem.jsx';
-import ChatList from './ChatList.jsx';
+import ChatItem from '../components/chat/ChatItem.jsx';
+import ChatList from '../components/chat/ChatList.jsx';
 import Box from '@mui/material/Box';
+import {Routes, Route} from "react-router-dom"
 
 function Chat(props) {
   return (
@@ -16,7 +17,9 @@ function Chat(props) {
         >
           <ChatList></ChatList>
         </Box>
-        <ChatItem></ChatItem>
+        <Routes>
+          <Route path=":code" element={<ChatItem/>}></Route>
+        </Routes>
       </Box>
   );
 }

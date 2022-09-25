@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {useParams} from "react-router-dom"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,10 +10,11 @@ import Typography from '@mui/material/Typography';
 
 const initCurrentMessage = () => ({id: null, author: "", text: ""});
 
-function LessonTwo(props) {
+function ChatItem(props) {
   const [messageList, setMessageList] = useState([]);
   const [currentMessage, setCurrentMessage] = useState(initCurrentMessage());
   const [nextId, setnextId] = useState(0);
+  const params = useParams();
   
   const setNewMessage = (key, value) => {
     const newCurrentMessage = {id: nextId};
@@ -55,7 +57,8 @@ function LessonTwo(props) {
   }, [messageList]);
 
   return (
-    <div>
+    <div key={params.code}>
+      <p>{params.code}</p>
       <Box
         component="form"
         sx={{
@@ -113,4 +116,4 @@ function LessonTwo(props) {
   );
 }
 
-export default LessonTwo;
+export default ChatItem;

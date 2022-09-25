@@ -1,19 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
-const initChatList = () => ([{id: 0, name: "Работа"}, {id: 1, name: "Мемчики"}]);
+import CustomLink from '../CustomLink.jsx';
 
 function Chat(props) {
-  const [chatList, setChatList] = useState([]);
+  const [chatList] = useState([{id: 0, name: "Работа", code: "work"}, {id: 1, name: "Мемчики", code: "mems"}]);
   const [selectedIndex, setSelectedIndex] = useState(1);
-
-  useEffect(() => {
-    setChatList(initChatList())
-  }, []);
-
+  
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
@@ -23,13 +18,14 @@ function Chat(props) {
       <List component="nav">
         {chatList.map((chat) => {
           return(
-            <ListItemButton
-              key={chat.id}
-              selected={selectedIndex === chat.id}
-              onClick={(event) => handleListItemClick(event, chat.id)}
-            >
-              <ListItemText primary={chat.name} />
-            </ListItemButton>
+            <CustomLink to={chat.code} key={chat.id}>
+              <ListItemButton
+                selected={selectedIndex === chat.id}
+                onClick={(event) => handleListItemClick(event, chat.id)}
+              >
+                <ListItemText primary={chat.name} />
+              </ListItemButton>
+            </CustomLink>
           )
         })}
       </List>
