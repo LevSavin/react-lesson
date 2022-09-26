@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 const initCurrentMessage = () => ({id: null, author: "", text: ""});
 
-function LessonTwo(props) {
+function ChatItem({code}) {
   const [messageList, setMessageList] = useState([]);
   const [currentMessage, setCurrentMessage] = useState(initCurrentMessage());
   const [nextId, setnextId] = useState(0);
@@ -56,6 +56,7 @@ function LessonTwo(props) {
 
   return (
     <div>
+      <p>{code}</p>
       <Box
         component="form"
         sx={{
@@ -96,7 +97,7 @@ function LessonTwo(props) {
       >
         {messageList.map((message) => {
           return(
-            <Card sx={{ mb: 3 }}>
+            <Card sx={{ mb: 3 }} key={message.id}>
               <CardContent>
                 <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                   {message.author}
@@ -113,4 +114,4 @@ function LessonTwo(props) {
   );
 }
 
-export default LessonTwo;
+export default ChatItem;
