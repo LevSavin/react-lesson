@@ -25,7 +25,6 @@ const initialState = {
 
 
 export const messagesReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
 
         case 'deleteMessage':
@@ -42,6 +41,14 @@ export const messagesReducer = (state = initialState, action) => {
                 ...state,
                 messages: addMessageState,
                 currentMessages: addMessageState.filter((item) => item.chatId === state.currentChat)
+            }
+
+        case 'addBotMessage':
+            const addBotMessageState = [...state.messages, action.payload];
+            return {
+                ...state,
+                messages: addBotMessageState,
+                currentMessages: addBotMessageState.filter((item) => item.chatId === state.currentChat)
             }
         
         case 'selectMessagesByChat':
