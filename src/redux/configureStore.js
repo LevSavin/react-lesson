@@ -1,17 +1,15 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {chatsReducer} from "./reducers/chatsReducer";
 import {messagesReducer} from "./reducers/messagesReducer";
-import storage from "redux-persist/lib/storage"
-import {persistReducer, persistStore} from "redux-persist"
-
-const config = {
-    key: "root",
-    storage,
-}
+import {productsReducer} from "./reducers/productsReducer";
+import {authReducer} from "./reducers/authReducer";
+import thunk from "redux-thunk" 
 
 const reducer = combineReducers({
     chatsReducer,
-    messagesReducer
+    messagesReducer,
+    productsReducer,
+    authReducer,
 })
 
 const handleMessage = store => next => action => {
@@ -36,9 +34,4 @@ const handleMessage = store => next => action => {
     return result
 }
 
-const persistedReducer = persistReducer(config, reducer);
-
-export const store = createStore(persistedReducer, applyMiddleware(handleMessage));
-export const persistor = persistStore(store);
-
-// export const store = createStore(reducer, applyMiddleware(botMessage)) - обчный стор
+export const store = createStore(reducer, applyMiddleware(thunk, handleMessage))
